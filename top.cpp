@@ -2,6 +2,7 @@
 #include <sstream>
 #include "carry_ripple.h"
 using namespace std;
+
 int sc_main(int argc , char* argv[]){
 	sc_vector<sc_signal<sc_logic>> I1,I2,O1,O2;
 	sc_signal<sc_logic> I3;
@@ -19,7 +20,7 @@ int sc_main(int argc , char* argv[]){
 	x.S_vec(O1);
 	x.Cout_vec(O2);
 
-	x.add_128bits();
+//	x.add_128bits();
 	
 	sc_start(1000,SC_NS);
 	
