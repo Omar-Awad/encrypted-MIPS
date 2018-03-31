@@ -1,4 +1,4 @@
-#include "systemc.h"
+/*#include "systemc.h"
 #include <iostream>
 #include "AES_ENC.h"
 
@@ -14,4 +14,4 @@ sc_lv<8> key_sig[4][4] = {{0x00, 0x01, 0x02, 0x03},{0x04, 0x05, 0x06, 0x07},{0x0
 
 sc_start();
 return 0;
-}
+}*/

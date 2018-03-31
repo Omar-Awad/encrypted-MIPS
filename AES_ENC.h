@@ -95,10 +95,13 @@ sc_uint<8> mixCol_matrix[4][4] = {{0x02, 0x03, 0x01, 0x01},
 {0x01, 0x01, 0x02, 0x03},
 {0x03, 0x01, 0x01, 0x02}};
 
+sc_uint<8> temp;
 for(int i=0; i<4;i++)
 	for(int j=0;j<4;j++)
-		for(int k=0;k<4;k++)
-			(sc_uint<8>)state[j][i] += (sc_uint<8>)state[k][i] * mixCol_matrix[j][k]; 
+		for(int k=0;k<4;k++){
+			temp = (sc_uint<8>)state[j][i];
+			state[j][i] = temp + temp * mixCol_matrix[j][k];
+		}
 };
 
 void addRoundKey(){
