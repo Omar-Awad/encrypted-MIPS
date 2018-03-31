@@ -26,13 +26,13 @@ sc_trace(wf,clk,"clk");
 sc_trace(wf,enable,"enable");
 sc_trace(wf,reset,"reset");
 
-A_addr = 2; B_addr = 3; A_in = 5; B_in= 9; w_r = 1; enable = 1; reset = 1; wait(); print();
-A_addr = 2; B_addr = 3; A_in = 5; B_in= 9; w_r = 1; enable = 1; reset = 0; wait(); print();
-A_addr = 4; B_addr = 3; A_in = 5; B_in= 12; w_r = 0; enable = 1; reset = 0; wait(); print();
-A_addr = 4; B_addr = 3; A_in = 5; B_in= 9; w_r = 0; enable = 1; reset = 0; wait(); print();
-A_addr = 4; B_addr = 3; A_in = 5; B_in= 9; w_r = 0; enable = 1; reset = 0; wait(); print();
-A_addr = 4; B_addr = 3; A_in = 5; B_in= 9; w_r = 0; enable = 1; reset = 0; wait(); print();
-A_addr = 4; B_addr = 3; A_in = 5; B_in= 9; w_r = 0; enable = 1; reset = 0; wait(); print();
+A_addr = 2; B_addr = 3; A_in = 5; B_in= 10; w_r = 1; enable = 1; reset = 0; wait(); print();wait();
+A_addr = 2; B_addr = 3; A_in = 5; B_in= 9; w_r = 0; enable = 1; reset = 0; wait(); print();wait();
+A_addr = 4; B_addr = 1; A_in = 5; B_in= 9; w_r = 1; enable = 1; reset = 0; wait(); print();wait();
+A_addr = 4; B_addr = 1; A_in = 5; B_in= 9; w_r = 0; enable = 1; reset = 0; wait(); print();wait();
+A_addr = 5; B_addr = 6; A_in = 5; B_in= 10; w_r = 1; enable = 1; reset = 0; wait(); print();wait();
+A_addr = 5; B_addr = 6; A_in = 5; B_in= 9; w_r = 0; enable = 1; reset = 0; wait(); print();wait();
+A_addr = 2; B_addr = 3; A_in = 5; B_in= 9; w_r = 0; enable = 1; reset = 0; wait(); print();wait();
 sc_stop();
 sc_close_vcd_trace_file(wf);
 }

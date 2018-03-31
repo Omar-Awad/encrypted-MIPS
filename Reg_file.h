@@ -8,14 +8,14 @@ sc_in<sc_uint<5>> A_addr, B_addr; //2 addresses
 sc_out<sc_bigint<128>> A_out , B_out; //output data from reg. file
 sc_in<sc_bigint<128>> A_in , B_in; // input data for reg. file
 sc_in<bool> w_r, enable, reset, clk; // write/read signal : w_r=1 (write), w_r=0 (read)
-int i;
+
 void Reg_file_func(){
 	if(w_r == 0){ //read
-		A_out = Q_vec[A_addr.read()];
-		B_out = Q_vec[B_addr.read()];
+		A_out = Q_vec[(int)A_addr.read()];
+		B_out = Q_vec[(int)B_addr.read()];
 	}else { //writes
-		D_vec[A_addr.read()] = A_in;
-		D_vec[B_addr.read()] = B_in;
+		D_vec[(int)A_addr.read()] = A_in;
+		D_vec[(int)B_addr.read()] = B_in;
 	}
 	return;
 };

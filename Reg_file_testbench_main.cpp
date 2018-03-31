@@ -11,24 +11,8 @@ sc_signal<bool> w_r,enable,reset; // write/read signal : w_r=1 (write), w_r=0 (r
 sc_clock clk("clk",20,SC_NS);
 Reg_file_testbench test1("test1");
 test1(A_addr,B_addr,A_out,B_out,A_in,B_in,w_r,enable,reset,clk);
-//Reg_file file1("file1");
-//file1(A_addr,B_addr,A_out,B_out,A_in,B_in,w_r,enable,reset,clk);
-
-Reg_file *x;
-x = new Reg_file("myReg");
-x -> A_addr(A_addr);
-x -> clk(clk);
-x -> B_addr(B_addr);
-x -> A_out(A_out);
-x -> B_out(B_out);
-x -> A_in(A_in);
-x -> B_in(B_in);
-x -> w_r(w_r);
-x -> enable(enable);
-x -> reset(reset);
-
+Reg_file file1("file1");
+file1(A_addr,B_addr,A_out,B_out,A_in,B_in,w_r,enable,reset,clk);
 sc_start();
 return 0;
-}
-
-*/
+}*/
