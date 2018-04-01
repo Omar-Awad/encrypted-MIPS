@@ -16,6 +16,10 @@ void invShiftRows();
 void invMixColumns();
 void invAddRoundKey(int rnd);
 void dec();
+sc_lv<8> mult9(sc_uint<8> i);
+sc_lv<8> mult11(sc_uint<8> i);
+sc_lv<8> mult13(sc_uint<8> i);
+sc_lv<8> mult14(sc_uint<8> i);
 void print();
 SC_CTOR(AES_DEC){
 SC_METHOD(dec)
