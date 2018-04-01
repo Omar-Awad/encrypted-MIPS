@@ -1,18 +1,22 @@
 #include"AES_ENC.h"
+
 void AES_ENC::keyExpa() {
 	sc_lv<128> keyInSig = keyIn;
 	sc_lv<8> key[4][4] ;
 	sc_lv<8> temp;
+
 	for(int i=0; i<4;i++)
 		for(int j=0;j<4;j++)
 			key[j][i] =  keyInSig.range(127-(i*32+j*8), 120-(i*32+j*8));
+
 	for(int i=0; i<4;i++)
 		for(int j=0;j<4;j++)
 			roundKey[0][i][j] = key[i][j];
+
 	for(int i=1;i<11;i++){ //10 rounds
 		//assign last col. in prev. roundKey to 1st col. in curr. roundKey
 		for(int j=0;j<4;j++){
-			roundKey[i][j][0] = getSBoxValue(static_cast< sc_uint<8> >( (roundKey[i-1][j][3]) ));
+			roundKey[i][j][0] = getSBoxValue(static_cast <sc_uint<8>> (roundKey[i-1][j][3]));
 		}
 		//rotWord
 		temp = roundKey[i][0][0];
@@ -21,14 +25,16 @@ void AES_ENC::keyExpa() {
 		roundKey[i][2][0] = roundKey[i][3][0];
 		roundKey[i][3][0] = temp;
 		roundKey[i][0][0] = roundKey[i][0][0] ^ getRcon(i-1);
+
 		for(int j=0;j<4;j++)
 			roundKey[i][j][0] = roundKey[i][j][0] ^ roundKey[i-1][j][0];
-		for(int j=0;j<4;j++)
-			for(int k=1;k<4;k++)
+
+		for(int k=1;k<4;k++)
+			for(int j=0;j<4;j++)
 				roundKey[i][j][k] = roundKey[i][j][k-1] ^ roundKey[i-1][j][k];
 	}
-	
 }
+
 sc_lv<8> AES_ENC::getSBoxValue(sc_uint<8> i){
 sc_lv<8> sbox[256] = {0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
 0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0,
@@ -48,6 +54,7 @@ sc_lv<8> sbox[256] = {0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01
 0x8c, 0xa1, 0x89, 0x0d, 0xbf, 0xe6, 0x42, 0x68, 0x41, 0x99, 0x2d, 0x0f, 0xb0, 0x54, 0xbb, 0x16};
 return sbox[i];
 }
+
 sc_lv<8> AES_ENC::getRcon(int i){
 sc_lv<8> Rcon[10] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36 };
 return Rcon[i];
@@ -56,7 +63,7 @@ return Rcon[i];
 void AES_ENC::subBytes(){
 for(int i=0;i<4;i++)
 	for(int j=0;j<4;j++)
-		data[i][j] = getSBoxValue(static_cast< sc_uint<8> >( (data[i][j]) ));
+		data[i][j] = getSBoxValue(static_cast <sc_uint<8>> (data[i][j]));
 }
 
 void AES_ENC::shiftRows(){
@@ -98,7 +105,6 @@ void AES_ENC::addRoundKey(int rnd){
 	for(int j=0; j<4;j++)
 		for(int i=0;i<4;i++)
 			data[i][j] ^= roundKey[rnd][i][j];
-	
 }
 
 void AES_ENC::enc(){
@@ -108,6 +114,7 @@ void AES_ENC::enc(){
 	for(int i=0; i<4;i++)
 		for(int j=0;j<4;j++)
 			data[j][i] =  txtSig.range(127-(i*32+j*8), 120-(i*32+j*8));
+
 	addRoundKey(0);
 	for(int i=1; i<10;i++){
 		subBytes();
@@ -118,6 +125,7 @@ void AES_ENC::enc(){
 	subBytes();
 	shiftRows();
 	addRoundKey(10);
+
 	for(int i=0; i<4;i++)
 		for(int j=0;j<4;j++)
 			cipherSig.range(127-(i*32+j*8), 120-(i*32+j*8)) = data[j][i];
