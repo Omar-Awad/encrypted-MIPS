@@ -1,4 +1,4 @@
-/*#include "systemc.h"
+#include "systemc.h"
 #include "Reg_file.h"
 #include "Reg_file_testbench.h"
 
@@ -15,4 +15,4 @@ Reg_file file1("file1");
 file1(A_addr,B_addr,A_out,B_out,A_in,B_in,w_r,enable,reset,clk);
 sc_start();
 return 0;
-}*/
+}

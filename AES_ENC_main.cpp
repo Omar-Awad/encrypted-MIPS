@@ -1,4 +1,4 @@
-#include"systemc.h"
+/*#include"systemc.h"
 #include"AES_ENC.h"
 #include <iostream>
 #include "AES_DEC.h"
@@ -25,4 +25,4 @@ int sc_main(int argc, char* argv[]){
 	cout << "Cipher= "<<std::hex << cipher << endl;
 	cout << "reversed txt= "<<std::hex << txt_reversed << endl;
 	return 0;
-}
+}*/

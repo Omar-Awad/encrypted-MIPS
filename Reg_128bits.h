@@ -12,6 +12,6 @@ void reg_function(){
 };
 SC_CTOR(Reg_128bits){
 	SC_METHOD(reg_function);
-	sensitive << res << clk.pos();
+	sensitive << clk.pos() << res;
 }
 };
