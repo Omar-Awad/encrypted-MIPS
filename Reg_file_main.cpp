@@ -1,18 +1,18 @@
 /*#include "systemc.h"
-#include "Reg_file.h"
-#include "Reg_file_testbench.h"
-
+#include <iostream>
+#include "ALU.h"
 int sc_main(int argc, char* argv[]){
-sc_signal<sc_uint<5>> A_addr, B_addr; //sc_uint<5> //2 addresses
-sc_signal<sc_bigint<128>> A_out , B_out; //output data from reg. file
-sc_signal<sc_bigint<128>> A_in , B_in; // input data for reg. file
-sc_signal<bool> w_r,enable,reset; // write/read signal : w_r=1 (write), w_r=0 (read)
+sc_signal<sc_lv<5>> B_addr;
+sc_signal<sc_lv<128>> A, B;
+sc_signal<sc_lv<128>> out;
+sc_signal<sc_logic> alu_sel,mux_sel;
 
-sc_clock clk("clk",20,SC_NS);
-Reg_file_testbench test1("test1");
-test1(A_addr,B_addr,A_out,B_out,A_in,B_in,w_r,enable,reset,clk);
-Reg_file file1("file1");
-file1(A_addr,B_addr,A_out,B_out,A_in,B_in,w_r,enable,reset,clk);
-sc_start();
+ALU myalu("myalu");
+myalu(B_addr, A, B, out, alu_sel, mux_sel);
+B_addr = "00001"; A = 0x0000003; B=0x0000001; alu_sel = SC_LOGIC_1; mux_sel = SC_LOGIC_0; 
+sc_start(20,SC_NS);
+cout << out << endl;
 return 0;
 }*/
+
+//needs modification
