@@ -8,10 +8,9 @@ sc_bigint<128> Imm, Z;
 
 void ALU_function(){
 	//sign extend
-	//Imm = (B_addr.read() << 58) >> 58;     we don't need it in our case
-
+	Imm = (B_addr.read() << 58) >> 58;    
 	// alu MUX
-	Z = (mux_sel == SC_LOGIC_0)? B.read() : B_addr.read();  //: Imm;
+	Z = (mux_sel == SC_LOGIC_0)? B.read() : Imm; //B_addr.read();  
 	if(alu_sel == SC_LOGIC_0)
 		out = sc_bigint<128>(A) + Z;
 	else
