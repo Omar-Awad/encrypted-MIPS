@@ -9,10 +9,8 @@ sc_signal<sc_logic> alu_sel,mux_sel;
 
 ALU myalu("myalu");
 myalu(B_addr, A, B, out, alu_sel, mux_sel);
-B_addr = "00001"; A = 0x0000003; B=0x0000001; alu_sel = SC_LOGIC_1; mux_sel = SC_LOGIC_0; 
+B_addr = "00010"; A = 0x0000003; B=0x0000001; alu_sel = SC_LOGIC_1; mux_sel = SC_LOGIC_1; 
 sc_start(20,SC_NS);
 cout << out << endl;
 return 0;
 }*/
-
-//needs modifications
