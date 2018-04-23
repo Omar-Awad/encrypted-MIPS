@@ -108,6 +108,7 @@ void AES_ENC::addRoundKey(int rnd){
 }
 
 void AES_ENC::enc(){
+	if(enc_dec && start) {
 	sc_lv<128> cipherSig;
 	sc_lv<128> txtSig = txt;
 	keyExpa();
@@ -130,4 +131,5 @@ void AES_ENC::enc(){
 		for(int j=0;j<4;j++)
 			cipherSig.range(127-(i*32+j*8), 120-(i*32+j*8)) = data[j][i];
 	cipher = cipherSig;
+	}
 }

@@ -1,21 +1,34 @@
 #include "systemc.h"
 SC_MODULE(MEM){
-sc_in<bool> clk;
+sc_in<bool> clk, bus_wb;
 sc_in<sc_lv<3>> pc; //4 instructions (from cell 1 to 4)
 sc_in<sc_lv<5>> mem_addr; //addr for read/write in mem
 sc_in<sc_lv<128>> mem_wb;
 sc_in<bool> w_r, inst_data; //w_r=1 (write), w_r=0 (read), inst_data=1(inst), inst_data=0(data)
 sc_out<sc_lv<128>> mem_out;
+sc_in<sc_lv<2>> block_addr; //AMBA
+sc_in<sc_lv<5>> cell_addr; //AMBA
+sc_out<sc_lv<32>> AMBA_out;
+sc_in<sc_lv<32>> AMBA_in;
 sc_lv<128> myMem[32];
 
 void mem_func(){
-	if(clk.event() && clk)
+	if(clk.event() && clk){
+		if(bus_wb == 0){
 		if(inst_data == 1)
 			mem_out = myMem[(sc_uint<3>)pc];
 		else if(w_r == 1)
 			myMem[(sc_uint<5>)mem_addr] = mem_wb;
 		else
 			mem_out = myMem[(sc_uint<5>)mem_addr];
+		}
+		else {
+			if(w_r == 1)
+				myMem[(sc_uint<5>)cell_addr].range(32*(sc_uint<2>)block_addr+31,32*(sc_uint<2>)block_addr) = AMBA_in.read();
+			else
+				AMBA_out = myMem[(sc_uint<5>)cell_addr].range(32*(sc_uint<2>)block_addr+31,32*(sc_uint<2>)block_addr);
+		}
+	}
 }
 
 SC_CTOR(MEM){

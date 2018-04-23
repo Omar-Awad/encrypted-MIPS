@@ -213,6 +213,7 @@ void AES_DEC::print(){
 }
 
 void AES_DEC::dec(){
+	if(!enc_dec && start){
 	sc_lv<128> cipherSig = cipher;
 	sc_lv<128> txtSig;
 	keyExpa();
@@ -236,6 +237,7 @@ void AES_DEC::dec(){
 			for (int j = 0; j < 4; j++)
 				txtSig.range(127-(i*32+j*8), 120-(i*32+j*8)) = data[j][i];
 		text = txtSig;
+	}
 }
 
 

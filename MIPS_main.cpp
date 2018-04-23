@@ -1,4 +1,4 @@
-#include "systemc.h"
+/*#include "systemc.h"
 #include "MIPS.h"
 #include "MIPS_testbench.h"
 #include <iostream>
@@ -25,4 +25,4 @@ test(reset, clk, mem_addr, mem_w_r, inst_data, A_addr, B_addr, regFile_w_r, enab
 
 sc_start();
 return 0;
-}
+}*/

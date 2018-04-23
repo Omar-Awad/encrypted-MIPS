@@ -1,7 +1,6 @@
 #include"systemc.h"
 SC_MODULE(AES_ENC) {
-sc_in<bool> clk;
-sc_in<sc_logic> reset;
+sc_in<bool> enc_dec, start;
 sc_in<sc_lv<128>> txt;
 sc_in<sc_lv<128>> keyIn;
 sc_out<sc_lv<128>> cipher;
@@ -17,6 +16,6 @@ void addRoundKey(int rnd);
 void enc();
 SC_CTOR(AES_ENC){
 SC_METHOD(enc)
-	sensitive << reset << clk.pos();
+	sensitive << start.pos(); //<< reset << clk.pos();
  }
 };

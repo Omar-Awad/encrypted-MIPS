@@ -1,7 +1,6 @@
 #include"systemc.h"
 SC_MODULE(AES_DEC) {
-sc_in<bool> clk;
-sc_in<sc_logic> reset;
+sc_in<bool> enc_dec, start;
 sc_in<sc_lv<128>> cipher;
 sc_in<sc_lv<128>> keyIn;
 sc_out<sc_lv<128>> text;
@@ -23,7 +22,7 @@ sc_lv<8> mult14(sc_uint<8> i);
 void print();
 SC_CTOR(AES_DEC){
 SC_METHOD(dec)
-sensitive << reset << clk.pos();
+sensitive << start.pos(); //<< reset << clk.pos();
  }
 };
 
