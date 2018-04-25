@@ -108,7 +108,7 @@ void AES_ENC::addRoundKey(int rnd){
 }
 
 void AES_ENC::enc(){
-	if(enc_dec && start) {
+	if(enc_dec && clk.event() && clk && start) {
 	sc_lv<128> cipherSig;
 	sc_lv<128> txtSig = txt;
 	keyExpa();

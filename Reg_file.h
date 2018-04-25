@@ -9,11 +9,7 @@ sc_in<bool> w_r, enable, reset, clk, wb_mux; // write/read signal : w_r=1 (write
 void Reg_file_func(){
 	if(reset){ //asynchronous reset
 		for(int i=0; i<32;i++)
-			Q_vec[i] = 0x0000000;
-	}
-	else if(w_r == 0){ //read
-		A_out = Q_vec[(sc_uint<5>)A_addr];
-		B_out = Q_vec[(sc_uint<5>)B_addr];
+			Q_vec[i] = 0;
 	}
 	else if(clk.event() && clk && enable){  //write
 			if(wb_mux == 1)
@@ -21,11 +17,16 @@ void Reg_file_func(){
 			else
 				Q_vec[(sc_uint<5>)A_addr] = A_in; //coming from mem
 	}
-	
+	else if(clk.event() && !clk){//read
+			if(w_r == 0){ 
+				A_out = Q_vec[(sc_uint<5>)A_addr];
+				B_out = Q_vec[(sc_uint<5>)B_addr];
+			}
+	}
 }
 
 SC_CTOR(Reg_file){
 SC_METHOD(Reg_file_func);
-sensitive << clk.pos() << reset;
+sensitive << clk << reset;
 }
 };

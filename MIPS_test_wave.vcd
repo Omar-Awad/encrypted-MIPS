@@ -1,5 +1,5 @@
 $date
-     Apr 17, 2018       20:15:36
+     Apr 25, 2018       15:50:49
 $end
 
 $version
@@ -13,24 +13,16 @@ $end
 $scope module SystemC $end
 $var wire    1  aaaaa  reset       $end
 $var wire    1  aaaab  clk       $end
-$var wire    5  aaaac  mem_addr [4:0]  $end
-$var wire    1  aaaad  mem_w_r       $end
-$var wire    1  aaaae  inst_data       $end
-$var wire    5  aaaaf  A_addr [4:0]  $end
-$var wire    5  aaaag  B_addr [4:0]  $end
-$var wire    1  aaaah  regFile_w_r       $end
-$var wire    1  aaaai  enable       $end
-$var wire    1  aaaaj  wb_mux       $end
-$var wire    1  aaaak  alu_sel       $end
-$var wire    1  aaaal  mux_sel       $end
-$var wire    3  aaaam  pc [2:0]  $end
-$var wire   128  aaaan  mem_out [127:0]  $end
-$var wire   128  aaaao  fetch_A [127:0]  $end
-$var wire   128  aaaap  fetch_B [127:0]  $end
-$var wire   128  aaaaq  Dec_A [127:0]  $end
-$var wire   128  aaaar  Dec_B [127:0]  $end
-$var wire   128  aaaas  Dec_Imm [127:0]  $end
-$var wire   128  aaaat  ALU_out [127:0]  $end
+$var wire   128  aaaac  mem_out [127:0]  $end
+$var wire    1  aaaad  enc_dec       $end
+$var wire    2  aaaae  burst_op [1:0]  $end
+$var wire    1  aaaaf  bus_wb       $end
+$var wire    1  aaaag  bus_trigger       $end
+$var wire    2  aaaah  block_addr [1:0]  $end
+$var wire    5  aaaai  cell_addr [4:0]  $end
+$var wire   32  aaaaj  AMBA_in [31:0]  $end
+$var wire   32  aaaak  AMBA_out [31:0]  $end
+$var wire    1  aaaal  amba_mem_w_r       $end
 $upscope $end
 $enddefinitions  $end
 
@@ -41,24 +33,16 @@ $end
 $dumpvars
 1aaaaa
 1aaaab
-bXXXXX aaaac
+bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaac
 0aaaad
-0aaaae
-bXXXXX aaaaf
-bXXXXX aaaag
-0aaaah
-0aaaai
-0aaaaj
-xaaaak
-xaaaal
-b1 aaaam
-bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaan
-bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaao
-bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaap
-bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaaq
-bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaar
-bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaas
-b11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111100000 aaaat
+bXX aaaae
+0aaaaf
+0aaaag
+b0 aaaah
+b0 aaaai
+bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaaj
+bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaak
+0aaaal
 $end
 
 #5000
@@ -67,62 +51,490 @@ $end
 #10000
 0aaaaa
 1aaaab
-b101 aaaac
-b10 aaaam
-b11 aaaan
-b0 aaaao
-b0 aaaap
-b11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111100001 aaaat
+1aaaad
+b11 aaaae
+1aaaaf
+1aaaag
+b101 aaaai
 
 #15000
 0aaaab
+b11100000001101110000011100110100 aaaaj
 
 #20000
 1aaaab
-b1 aaaaf
-1aaaah
-1aaaai
-b11 aaaam
+b1 aaaah
 
 #25000
 0aaaab
+b110001001100011001100010100010 aaaaj
 
 #30000
 1aaaab
-0aaaah
-b100 aaaam
-b11 aaaao
-b11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111100100 aaaat
+b10 aaaah
 
 #35000
 0aaaab
+b10001000010110100011000010001101 aaaaj
 
 #40000
 1aaaab
-b10 aaaag
-0aaaak
-0aaaal
-b1 aaaam
-b11 aaaat
+b11 aaaah
 
 #45000
 0aaaab
+b110010010000111111011010101000 aaaaj
 
 #50000
 1aaaab
-b110 aaaac
-1aaaad
-1aaaaj
-b10 aaaam
 
 #55000
 0aaaab
 
 #60000
 1aaaab
-0aaaad
-b11 aaaam
 
 #65000
+0aaaab
+
+#70000
+1aaaab
+b111001001001011000010000011101 aaaak
+1aaaal
+
+#75000
+0aaaab
+
+#80000
+1aaaab
+b10 aaaah
+
+#85000
+0aaaab
+
+#90000
+1aaaab
+b1 aaaah
+b10110111000000100111111011 aaaak
+
+#95000
+0aaaab
+
+#100000
+1aaaab
+b0 aaaah
+b11011100000100011000010110010111 aaaak
+
+#105000
+0aaaab
+
+#110000
+1aaaab
+b110 aaaai
+b11001011010100000101100110010 aaaak
+0aaaal
+
+#115000
+0aaaab
+b111 aaaaj
+
+#120000
+1aaaab
+b1 aaaah
+
+#125000
+0aaaab
+b0 aaaaj
+
+#130000
+1aaaab
+b10 aaaah
+
+#135000
+0aaaab
+
+#140000
+1aaaab
+b11 aaaah
+
+#145000
+0aaaab
+
+#150000
+1aaaab
+
+#155000
+0aaaab
+
+#160000
+1aaaab
+
+#165000
+0aaaab
+
+#170000
+1aaaab
+b10001011011010101111000000011010 aaaak
+1aaaal
+
+#175000
+0aaaab
+
+#180000
+1aaaab
+b10 aaaah
+
+#185000
+0aaaab
+
+#190000
+1aaaab
+b1 aaaah
+b11001011011101000110010011001011 aaaak
+
+#195000
+0aaaab
+
+#200000
+1aaaab
+b0 aaaah
+b1101000110001001010001101010100 aaaak
+
+#205000
+0aaaab
+
+#210000
+1aaaab
+b111 aaaai
+b10001010101011111001010110100110 aaaak
+0aaaal
+
+#215000
+0aaaab
+b1000 aaaaj
+
+#220000
+1aaaab
+b1 aaaah
+
+#225000
+0aaaab
+b0 aaaaj
+
+#230000
+1aaaab
+b10 aaaah
+
+#235000
+0aaaab
+
+#240000
+1aaaab
+b11 aaaah
+
+#245000
+0aaaab
+
+#250000
+1aaaab
+
+#255000
+0aaaab
+
+#260000
+1aaaab
+
+#265000
+0aaaab
+
+#270000
+1aaaab
+b1100011111001010010001111010 aaaak
+1aaaal
+
+#275000
+0aaaab
+
+#280000
+1aaaab
+b10 aaaah
+
+#285000
+0aaaab
+
+#290000
+1aaaab
+b1 aaaah
+b11101111101000111000110110101 aaaak
+
+#295000
+0aaaab
+
+#300000
+1aaaab
+b0 aaaah
+b10100010011100111111111011000011 aaaak
+
+#305000
+0aaaab
+
+#310000
+1aaaab
+b1000 aaaai
+b10111110001011100101100101011011 aaaak
+0aaaal
+
+#315000
+0aaaab
+b11 aaaaj
+
+#320000
+1aaaab
+b1 aaaah
+
+#325000
+0aaaab
+b0 aaaaj
+
+#330000
+1aaaab
+b10 aaaah
+
+#335000
+0aaaab
+
+#340000
+1aaaab
+b11 aaaah
+
+#345000
+0aaaab
+
+#350000
+1aaaab
+
+#355000
+0aaaab
+
+#360000
+1aaaab
+
+#365000
+0aaaab
+
+#370000
+1aaaab
+b1000110100111000111111111001011 aaaak
+1aaaal
+
+#375000
+0aaaab
+
+#380000
+1aaaab
+b10 aaaah
+
+#385000
+0aaaab
+
+#390000
+1aaaab
+b1 aaaah
+b1110101110101011101100110100001 aaaak
+
+#395000
+0aaaab
+
+#400000
+1aaaab
+b0 aaaah
+b10110100000110001100101110011001 aaaak
+
+#405000
+0aaaab
+
+#410000
+1aaaab
+b1111011000010011010000110000101 aaaak
+0aaaal
+
+#415000
+0aaaab
+b10110100000110001100101110011001 aaaaj
+
+#420000
+1aaaab
+
+#425000
+0aaaab
+
+#430000
+1aaaab
+
+#435000
+0aaaab
+
+#440000
+1aaaab
+
+#445000
+0aaaab
+
+#450000
+1aaaab
+
+#455000
+0aaaab
+
+#460000
+1aaaab
+
+#465000
+0aaaab
+
+#470000
+1aaaab
+
+#475000
+0aaaab
+
+#480000
+1aaaab
+
+#485000
+0aaaab
+
+#490000
+1aaaab
+
+#495000
+0aaaab
+
+#500000
+1aaaab
+
+#505000
+0aaaab
+
+#510000
+1aaaab
+0aaaaf
+
+#515000
+0aaaab
+b111001001001011000010000011101001110010010010110000100000111010000001011011100000010011111101111011100000100011000010110010111 aaaac
+
+#520000
+1aaaab
+
+#525000
+0aaaab
+
+#530000
+1aaaab
+
+#535000
+0aaaab
+
+#540000
+1aaaab
+
+#545000
+0aaaab
+
+#550000
+1aaaab
+
+#555000
+0aaaab
+
+#560000
+1aaaab
+
+#565000
+0aaaab
+
+#570000
+1aaaab
+
+#575000
+0aaaab
+
+#580000
+1aaaab
+
+#585000
+0aaaab
+
+#590000
+1aaaab
+
+#595000
+0aaaab
+
+#600000
+1aaaab
+
+#605000
+0aaaab
+
+#610000
+1aaaab
+
+#615000
+0aaaab
+
+#620000
+1aaaab
+
+#625000
+0aaaab
+
+#630000
+1aaaab
+
+#635000
+0aaaab
+
+#640000
+1aaaab
+
+#645000
+0aaaab
+
+#650000
+1aaaab
+
+#655000
+0aaaab
+
+#660000
+1aaaab
+
+#665000
+0aaaab
+
+#670000
+1aaaab
+
+#675000
+0aaaab
+
+#680000
+1aaaab
+
+#685000
+0aaaab
+
+#690000
+1aaaab
+
+#695000
+0aaaab
+
+#700000
+1aaaab
+
+#705000
 0aaaab
 

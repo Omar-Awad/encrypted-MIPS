@@ -213,7 +213,7 @@ void AES_DEC::print(){
 }
 
 void AES_DEC::dec(){
-	if(!enc_dec && start){
+	if(!enc_dec && clk.event() && clk && start){
 	sc_lv<128> cipherSig = cipher;
 	sc_lv<128> txtSig;
 	keyExpa();
