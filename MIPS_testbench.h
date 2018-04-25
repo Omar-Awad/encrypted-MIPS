@@ -63,7 +63,10 @@ mem_addr = 6; mem_w_r = 0; inst_data = 0; wait(10, SC_NS); print();*/
 
 reset = 0; inst_data = 0; enc_dec = 1; burst_op = 3; bus_wb = 1; mem_addr = 5; bus_trigger = 1; 
 wait(500, SC_NS); print();
-bus_wb = 0; mem_w_r = 0; wait(200, SC_NS); print();
+mem_addr = 5; bus_wb = 0; mem_w_r = 0; wait(100, SC_NS); print();
+mem_addr = 6; bus_wb = 0; mem_w_r = 0; wait(100, SC_NS); print();
+mem_addr = 7; bus_wb = 0; mem_w_r = 0; wait(100, SC_NS); print();
+mem_addr = 8; bus_wb = 0; mem_w_r = 0; wait(100, SC_NS); print();
 
 sc_stop();
 sc_close_vcd_trace_file(wf);
