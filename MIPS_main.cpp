@@ -1,6 +1,7 @@
 #include "systemc.h"
 #include "MIPS.h"
 #include "MIPS_testbench.h"
+#include "controller.h"
 #include <iostream>
 #include <sstream>
 
@@ -23,6 +24,10 @@ sc_signal<sc_lv<5>> cell_addr;
 sc_signal<sc_lv<32>> AMBA_in, AMBA_out;
 
 sc_clock clk("clk", 10, SC_NS);
+
+controller cntr("cntr");
+cntr(reset, clk, mem_addr, mem_w_r, inst_data, A_addr, B_addr, regFile_w_r, enable, wb_mux, alu_sel, mux_sel, enc_dec, burst_op, bus_wb,
+	   bus_trigger, pc, mem_out);
 
 MIPS myMIPS("myMIPS");
 myMIPS(reset, clk, mem_addr, mem_w_r, inst_data, A_addr, B_addr, regFile_w_r, enable, wb_mux, alu_sel, mux_sel, enc_dec, burst_op, bus_wb,

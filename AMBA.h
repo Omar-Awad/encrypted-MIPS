@@ -25,10 +25,10 @@ AES_DEC *dec;
 
 void burst_mode(){
 	if(bus_trigger.event() && bus_trigger){
-		flag2 = 1;
-		sig_cell_addr = start_addr.read();
+			flag2 = 1;
+			sig_cell_addr = start_addr.read();
 	}
-
+		
 	if(clk.event() && clk){
 		switch((sc_uint<2>) burst_op){
 			case 0 : inst_count = 1; break;
@@ -46,11 +46,11 @@ void burst_mode(){
 				else
 					sig_block_addr++;
 			}
-			else if(sig_block_addr == 0 && start){								
+			else if(sig_block_addr == 0){								
 					if(inst_count - counter1 > 1){ 
 						sig_cell_addr++;
 					}
-				start = 0;
+				start = 0;	
 				counter1++;		
 			}
 		}	
@@ -64,16 +64,19 @@ void burst_mode(){
 	if(flag){
 		flag3 = 1;
 		mem_w_r = 1;
-		out = (enc_dec == 1)? sig1_out.read().range(32*sig_block_addr+31,32*sig_block_addr) : sig2_out.read().range(32*sig_block_addr+31,32*sig_block_addr);
-		
 		if(flag3)
 			if(sig_block_addr == 0){
 				flag = 0;
 				flag3 = 0;
-				mem_w_r = 0;
+				if(inst_count - counter1 > 0){ 
+					mem_w_r = 0;
+				}
 			}
 			else 
 				 sig_block_addr--;
+		out = (enc_dec == 1)? sig1_out.read().range(32*sig_block_addr+31,32*sig_block_addr) : sig2_out.read().range(32*sig_block_addr+31,32*sig_block_addr);
+
+
 	}
 }
 sig_in = sig_in_temp;
@@ -91,6 +94,6 @@ dec =  new AES_DEC("dec");
 (*dec)(clk, enc_dec, start, sig_in, key, sig2_out);
 
 SC_METHOD(burst_mode);
-sensitive << clk.pos() << bus_trigger.pos();
+sensitive << clk.pos()  << bus_trigger.pos();
 }
 };

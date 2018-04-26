@@ -1,5 +1,5 @@
 $date
-     Apr 25, 2018       19:01:48
+     Apr 26, 2018       22:14:53
 $end
 
 $version
@@ -11,18 +11,35 @@ $timescale
 $end
 
 $scope module SystemC $end
-$var wire    1  aaaaa  reset       $end
-$var wire    1  aaaab  clk       $end
-$var wire   128  aaaac  mem_out [127:0]  $end
-$var wire    1  aaaad  enc_dec       $end
-$var wire    2  aaaae  burst_op [1:0]  $end
-$var wire    1  aaaaf  bus_wb       $end
-$var wire    1  aaaag  bus_trigger       $end
-$var wire    2  aaaah  block_addr [1:0]  $end
-$var wire    5  aaaai  cell_addr [4:0]  $end
-$var wire   32  aaaaj  AMBA_in [31:0]  $end
-$var wire   32  aaaak  AMBA_out [31:0]  $end
-$var wire    1  aaaal  amba_mem_w_r       $end
+$var wire    1  aaaaa  clk       $end
+$var wire    1  aaaab  reset       $end
+$var wire    5  aaaac  mem_addr [4:0]  $end
+$var wire    1  aaaad  mem_w_r       $end
+$var wire    1  aaaae  inst_data       $end
+$var wire    5  aaaaf  A_addr [4:0]  $end
+$var wire    5  aaaag  B_addr [4:0]  $end
+$var wire    1  aaaah  regFile_w_r       $end
+$var wire    1  aaaai  enable       $end
+$var wire    1  aaaaj  wb_mux       $end
+$var wire    1  aaaak  alu_sel       $end
+$var wire    1  aaaal  mux_sel       $end
+$var wire    3  aaaam  pc [2:0]  $end
+$var wire   128  aaaan  fetch_A [127:0]  $end
+$var wire   128  aaaao  fetch_B [127:0]  $end
+$var wire   128  aaaap  Dec_A [127:0]  $end
+$var wire   128  aaaaq  Dec_B [127:0]  $end
+$var wire   128  aaaar  Dec_Imm [127:0]  $end
+$var wire   128  aaaas  ALU_out [127:0]  $end
+$var wire   128  aaaat  mem_out [127:0]  $end
+$var wire    1  aaaau  enc_dec       $end
+$var wire    2  aaaav  burst_op [1:0]  $end
+$var wire    1  aaaaw  bus_wb       $end
+$var wire    1  aaaax  bus_trigger       $end
+$var wire    2  aaaay  block_addr [1:0]  $end
+$var wire    5  aaaaz  cell_addr [4:0]  $end
+$var wire   32  aaaba  AMBA_in [31:0]  $end
+$var wire   32  aaabb  AMBA_out [31:0]  $end
+$var wire    1  aaabc  amba_mem_w_r       $end
 $upscope $end
 $enddefinitions  $end
 
@@ -33,632 +50,680 @@ $end
 $dumpvars
 1aaaaa
 1aaaab
-bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaac
+bXXXXX aaaac
 0aaaad
-bXX aaaae
-0aaaaf
-0aaaag
-b0 aaaah
-b0 aaaai
-bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaaj
-bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaak
-0aaaal
+1aaaae
+bXXXXX aaaaf
+bXXXXX aaaag
+0aaaah
+0aaaai
+0aaaaj
+xaaaak
+xaaaal
+b1 aaaam
+bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaan
+bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaao
+bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaap
+bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaaq
+bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaar
+b11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111100000 aaaas
+bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaat
+0aaaau
+bXX aaaav
+0aaaaw
+0aaaax
+b0 aaaay
+b0 aaaaz
+bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaaba
+bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX aaabb
+0aaabc
 $end
 
 #5000
-0aaaab
+0aaaaa
+b1010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 aaaat
 
 #10000
-0aaaaa
-1aaaab
-1aaaad
-b11 aaaae
-1aaaaf
-1aaaag
-b101 aaaai
+1aaaaa
 
 #15000
-0aaaab
-b11100000001101110000011100110100 aaaaj
+0aaaaa
 
 #20000
-1aaaab
-b1 aaaah
+1aaaaa
 
 #25000
-0aaaab
-b110001001100011001100010100010 aaaaj
+0aaaaa
 
 #30000
-1aaaab
-b10 aaaah
+1aaaaa
 
 #35000
-0aaaab
-b10001000010110100011000010001101 aaaaj
+0aaaaa
 
 #40000
-1aaaab
-b11 aaaah
+1aaaaa
+0aaaab
+b101 aaaac
+0aaaae
+1aaaau
+b0 aaaav
+1aaaaw
+1aaaax
+b101 aaaaz
 
 #45000
-0aaaab
-b110010010000111111011010101000 aaaaj
+0aaaaa
+b0 aaaan
+b0 aaaao
+b11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111100001 aaaas
+b11100000001101110000011100110100 aaaba
 
 #50000
-1aaaab
+1aaaaa
+b1 aaaay
 
 #55000
-0aaaab
+0aaaaa
+b110001001100011001100010100010 aaaba
 
 #60000
-1aaaab
+1aaaaa
+b10 aaaay
 
 #65000
-0aaaab
+0aaaaa
+b10001000010110100011000010001101 aaaba
 
 #70000
-1aaaab
-b111001001001011000010000011101 aaaak
-1aaaal
+1aaaaa
+b11 aaaay
 
 #75000
-0aaaab
+0aaaaa
+b110010010000111111011010101000 aaaba
 
 #80000
-1aaaab
-b10 aaaah
-b10110111000000100111111011 aaaak
+1aaaaa
 
 #85000
-0aaaab
+0aaaaa
 
 #90000
-1aaaab
-b1 aaaah
-b11011100000100011000010110010111 aaaak
+1aaaaa
 
 #95000
-0aaaab
+0aaaaa
 
 #100000
-1aaaab
-b0 aaaah
-b11001011010100000101100110010 aaaak
+1aaaaa
+b111001001001011000010000011101 aaabb
+1aaabc
 
 #105000
-0aaaab
+0aaaaa
 
 #110000
-1aaaab
-b110 aaaai
-0aaaal
+1aaaaa
+b10 aaaay
+b10110111000000100111111011 aaabb
 
 #115000
-0aaaab
-b11100000001101110000011100110100 aaaaj
+0aaaaa
 
 #120000
-1aaaab
-b1 aaaah
+1aaaaa
+b1 aaaay
+b11011100000100011000010110010111 aaabb
 
 #125000
-0aaaab
-b110001001100011001100010100010 aaaaj
+0aaaaa
 
 #130000
-1aaaab
-b10 aaaah
+1aaaaa
+b0 aaaay
+b11001011010100000101100110010 aaabb
 
 #135000
-0aaaab
-b10001000010110100011000010001101 aaaaj
+0aaaaa
 
 #140000
-1aaaab
-b11 aaaah
+1aaaaa
 
 #145000
-0aaaab
-b110010010000111111011010101000 aaaaj
+0aaaaa
 
 #150000
-1aaaab
+1aaaaa
 
 #155000
-0aaaab
+0aaaaa
 
 #160000
-1aaaab
+1aaaaa
 
 #165000
-0aaaab
+0aaaaa
 
 #170000
-1aaaab
-b111001001001011000010000011101 aaaak
-1aaaal
+1aaaaa
 
 #175000
-0aaaab
+0aaaaa
 
 #180000
-1aaaab
-b10 aaaah
-b10110111000000100111111011 aaaak
+1aaaaa
 
 #185000
-0aaaab
+0aaaaa
 
 #190000
-1aaaab
-b1 aaaah
-b11011100000100011000010110010111 aaaak
+1aaaaa
 
 #195000
-0aaaab
+0aaaaa
 
 #200000
-1aaaab
-b0 aaaah
-b11001011010100000101100110010 aaaak
+1aaaaa
 
 #205000
-0aaaab
+0aaaaa
 
 #210000
-1aaaab
-b111 aaaai
-0aaaal
+1aaaaa
 
 #215000
-0aaaab
-b11100000001101110000011100110100 aaaaj
+0aaaaa
 
 #220000
-1aaaab
-b1 aaaah
+1aaaaa
 
 #225000
-0aaaab
-b110001001100011001100010100010 aaaaj
+0aaaaa
 
 #230000
-1aaaab
-b10 aaaah
+1aaaaa
 
 #235000
-0aaaab
-b10001000010110100011000010001101 aaaaj
+0aaaaa
 
 #240000
-1aaaab
-b11 aaaah
+1aaaaa
 
 #245000
-0aaaab
-b110010010000111111011010101000 aaaaj
+0aaaaa
 
 #250000
-1aaaab
+1aaaaa
 
 #255000
-0aaaab
+0aaaaa
 
 #260000
-1aaaab
+1aaaaa
 
 #265000
-0aaaab
+0aaaaa
 
 #270000
-1aaaab
-b111001001001011000010000011101 aaaak
-1aaaal
+1aaaaa
 
 #275000
-0aaaab
+0aaaaa
 
 #280000
-1aaaab
-b10 aaaah
-b10110111000000100111111011 aaaak
+1aaaaa
 
 #285000
-0aaaab
+0aaaaa
 
 #290000
-1aaaab
-b1 aaaah
-b11011100000100011000010110010111 aaaak
+1aaaaa
 
 #295000
-0aaaab
+0aaaaa
 
 #300000
-1aaaab
-b0 aaaah
-b11001011010100000101100110010 aaaak
+1aaaaa
 
 #305000
-0aaaab
+0aaaaa
 
 #310000
-1aaaab
-b1000 aaaai
-0aaaal
+1aaaaa
 
 #315000
-0aaaab
-b11100000001101110000011100110100 aaaaj
+0aaaaa
 
 #320000
-1aaaab
-b1 aaaah
+1aaaaa
 
 #325000
-0aaaab
-b110001001100011001100010100010 aaaaj
+0aaaaa
 
 #330000
-1aaaab
-b10 aaaah
+1aaaaa
 
 #335000
-0aaaab
-b10001000010110100011000010001101 aaaaj
+0aaaaa
 
 #340000
-1aaaab
-b11 aaaah
+1aaaaa
 
 #345000
-0aaaab
-b110010010000111111011010101000 aaaaj
+0aaaaa
 
 #350000
-1aaaab
+1aaaaa
 
 #355000
-0aaaab
+0aaaaa
 
 #360000
-1aaaab
+1aaaaa
 
 #365000
-0aaaab
+0aaaaa
 
 #370000
-1aaaab
-b111001001001011000010000011101 aaaak
-1aaaal
+1aaaaa
 
 #375000
-0aaaab
+0aaaaa
 
 #380000
-1aaaab
-b10 aaaah
-b10110111000000100111111011 aaaak
+1aaaaa
 
 #385000
-0aaaab
+0aaaaa
 
 #390000
-1aaaab
-b1 aaaah
-b11011100000100011000010110010111 aaaak
+1aaaaa
 
 #395000
-0aaaab
+0aaaaa
 
 #400000
-1aaaab
-b0 aaaah
-b11001011010100000101100110010 aaaak
+1aaaaa
 
 #405000
-0aaaab
+0aaaaa
 
 #410000
-1aaaab
+1aaaaa
 
 #415000
-0aaaab
+0aaaaa
 
 #420000
-1aaaab
+1aaaaa
 
 #425000
-0aaaab
+0aaaaa
 
 #430000
-1aaaab
+1aaaaa
 
 #435000
-0aaaab
+0aaaaa
 
 #440000
-1aaaab
+1aaaaa
 
 #445000
-0aaaab
+0aaaaa
 
 #450000
-1aaaab
+1aaaaa
 
 #455000
-0aaaab
+0aaaaa
 
 #460000
-1aaaab
+1aaaaa
 
 #465000
-0aaaab
+0aaaaa
 
 #470000
-1aaaab
+1aaaaa
 
 #475000
-0aaaab
+0aaaaa
 
 #480000
-1aaaab
+1aaaaa
 
 #485000
-0aaaab
+0aaaaa
 
 #490000
-1aaaab
+1aaaaa
 
 #495000
-0aaaab
+0aaaaa
 
 #500000
-1aaaab
+1aaaaa
 
 #505000
-0aaaab
+0aaaaa
 
 #510000
-1aaaab
-0aaaaf
+1aaaaa
 
 #515000
-0aaaab
-b111001001001011000010000011101000000101101110000001001111110111101110000010001100001011001011100011001011010100000101100110010 aaaac
+0aaaaa
 
 #520000
-1aaaab
+1aaaaa
 
 #525000
-0aaaab
+0aaaaa
 
 #530000
-1aaaab
+1aaaaa
 
 #535000
-0aaaab
+0aaaaa
 
 #540000
-1aaaab
+1aaaaa
 
 #545000
-0aaaab
+0aaaaa
 
 #550000
-1aaaab
+1aaaaa
 
 #555000
-0aaaab
+0aaaaa
 
 #560000
-1aaaab
+1aaaaa
 
 #565000
-0aaaab
+0aaaaa
 
 #570000
-1aaaab
+1aaaaa
 
 #575000
-0aaaab
+0aaaaa
 
 #580000
-1aaaab
+1aaaaa
 
 #585000
-0aaaab
+0aaaaa
 
 #590000
-1aaaab
+1aaaaa
 
 #595000
-0aaaab
+0aaaaa
 
 #600000
-1aaaab
+1aaaaa
 
 #605000
-0aaaab
+0aaaaa
 
 #610000
-1aaaab
+1aaaaa
 
 #615000
-0aaaab
+0aaaaa
 
 #620000
-1aaaab
+1aaaaa
 
 #625000
-0aaaab
+0aaaaa
 
 #630000
-1aaaab
+1aaaaa
 
 #635000
-0aaaab
+0aaaaa
 
 #640000
-1aaaab
+1aaaaa
 
 #645000
-0aaaab
+0aaaaa
 
 #650000
-1aaaab
+1aaaaa
 
 #655000
-0aaaab
+0aaaaa
 
 #660000
-1aaaab
+1aaaaa
 
 #665000
-0aaaab
+0aaaaa
 
 #670000
-1aaaab
+1aaaaa
 
 #675000
-0aaaab
+0aaaaa
 
 #680000
-1aaaab
+1aaaaa
 
 #685000
-0aaaab
+0aaaaa
 
 #690000
-1aaaab
+1aaaaa
 
 #695000
-0aaaab
+0aaaaa
 
 #700000
-1aaaab
+1aaaaa
 
 #705000
-0aaaab
+0aaaaa
 
 #710000
-1aaaab
+1aaaaa
 
 #715000
-0aaaab
+0aaaaa
 
 #720000
-1aaaab
+1aaaaa
 
 #725000
-0aaaab
+0aaaaa
 
 #730000
-1aaaab
+1aaaaa
 
 #735000
-0aaaab
+0aaaaa
 
 #740000
-1aaaab
+1aaaaa
 
 #745000
-0aaaab
+0aaaaa
 
 #750000
-1aaaab
+1aaaaa
 
 #755000
-0aaaab
+0aaaaa
 
 #760000
-1aaaab
+1aaaaa
 
 #765000
-0aaaab
+0aaaaa
 
 #770000
-1aaaab
+1aaaaa
 
 #775000
-0aaaab
+0aaaaa
 
 #780000
-1aaaab
+1aaaaa
 
 #785000
-0aaaab
+0aaaaa
 
 #790000
-1aaaab
+1aaaaa
 
 #795000
-0aaaab
+0aaaaa
 
 #800000
-1aaaab
+1aaaaa
 
 #805000
-0aaaab
+0aaaaa
 
 #810000
-1aaaab
+1aaaaa
 
 #815000
-0aaaab
+0aaaaa
 
 #820000
-1aaaab
+1aaaaa
 
 #825000
-0aaaab
+0aaaaa
 
 #830000
-1aaaab
+1aaaaa
 
 #835000
-0aaaab
+0aaaaa
 
 #840000
-1aaaab
+1aaaaa
 
 #845000
-0aaaab
+0aaaaa
 
 #850000
-1aaaab
+1aaaaa
 
 #855000
-0aaaab
+0aaaaa
 
 #860000
-1aaaab
+1aaaaa
 
 #865000
-0aaaab
+0aaaaa
 
 #870000
-1aaaab
+1aaaaa
 
 #875000
-0aaaab
+0aaaaa
 
 #880000
-1aaaab
+1aaaaa
 
 #885000
-0aaaab
+0aaaaa
 
 #890000
-1aaaab
+1aaaaa
 
 #895000
-0aaaab
+0aaaaa
 
 #900000
-1aaaab
+1aaaaa
 
 #905000
-0aaaab
+0aaaaa
+
+#910000
+1aaaaa
+
+#915000
+0aaaaa
+
+#920000
+1aaaaa
+
+#925000
+0aaaaa
+
+#930000
+1aaaaa
+
+#935000
+0aaaaa
+
+#940000
+1aaaaa
+
+#945000
+0aaaaa
+
+#950000
+1aaaaa
+
+#955000
+0aaaaa
+
+#960000
+1aaaaa
+
+#965000
+0aaaaa
+
+#970000
+1aaaaa
+
+#975000
+0aaaaa
+
+#980000
+1aaaaa
+
+#985000
+0aaaaa
+
+#990000
+1aaaaa
+
+#995000
+0aaaaa
+
+#1000000
+1aaaaa
+
+#1005000
+0aaaaa
+
+#1010000
+1aaaaa
+
+#1015000
+0aaaaa
+
+#1020000
+1aaaaa
+
+#1025000
+0aaaaa
+
+#1030000
+1aaaaa
+
+#1035000
+0aaaaa
 

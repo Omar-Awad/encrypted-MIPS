@@ -3,15 +3,15 @@
 SC_MODULE(MIPS_testbench){
 sc_out<bool> reset;
 sc_in<bool> clk;
-sc_out<sc_lv<5>> mem_addr;
-sc_out<bool> mem_w_r, inst_data;
-sc_out<sc_lv<5>> A_addr, B_addr;
-sc_out<bool> regFile_w_r, enable, wb_mux;
-sc_out<sc_logic> alu_sel, mux_sel;
-sc_out<bool> enc_dec;
-sc_out<sc_lv<2>> burst_op;
-sc_out<bool> bus_wb;
-sc_out<bool> bus_trigger;
+sc_in<sc_lv<5>> mem_addr;
+sc_in<bool> mem_w_r, inst_data;
+sc_in<sc_lv<5>> A_addr, B_addr;
+sc_in<bool> regFile_w_r, enable, wb_mux;
+sc_in<sc_logic> alu_sel, mux_sel;
+sc_in<bool> enc_dec;
+sc_in<sc_lv<2>> burst_op;
+sc_in<bool> bus_wb;
+sc_in<bool> bus_trigger;
 sc_in<bool> amba_mem_w_r;
 sc_in<sc_lv<3>> pc;
 sc_in<sc_lv<128>> mem_out, fetch_A, fetch_B, Dec_A, Dec_B, Dec_Imm, ALU_out;
@@ -21,9 +21,9 @@ sc_in<sc_lv<32>> AMBA_in, AMBA_out;
 
 void process(){
 sc_trace_file *wf = sc_create_vcd_trace_file("MIPS_test_wave");
-sc_trace(wf,reset,"reset");
 sc_trace(wf,clk,"clk");
-/*sc_trace(wf,mem_addr,"mem_addr");
+sc_trace(wf,reset,"reset");
+sc_trace(wf,mem_addr,"mem_addr");
 sc_trace(wf,mem_w_r,"mem_w_r");
 sc_trace(wf,inst_data,"inst_data");
 sc_trace(wf,A_addr,"A_addr");
@@ -39,7 +39,7 @@ sc_trace(wf,fetch_B,"fetch_B");
 sc_trace(wf,Dec_A,"Dec_A");
 sc_trace(wf,Dec_B,"Dec_B");
 sc_trace(wf,Dec_Imm,"Dec_Imm");
-sc_trace(wf,ALU_out,"ALU_out");*/
+sc_trace(wf,ALU_out,"ALU_out");
 sc_trace(wf,mem_out,"mem_out");
 sc_trace(wf,enc_dec,"enc_dec");
 sc_trace(wf,burst_op,"burst_op");
@@ -51,7 +51,11 @@ sc_trace(wf,AMBA_in,"AMBA_in");
 sc_trace(wf,AMBA_out,"AMBA_out");
 sc_trace(wf,amba_mem_w_r,"amba_mem_w_r");
 
-reset = 1; wait(10, SC_NS); print();
+reset = 1; wait(40, SC_NS); reset = 0;
+
+wait(1,SC_US); print();
+
+
 /*reset = 0; mem_addr = 5; mem_w_r = 0; inst_data = 0; wait(10, SC_NS); print();
 A_addr = 1; regFile_w_r = 1; enable = 1; wb_mux = 0; wait(10, SC_NS); print();
 A_addr = 1; regFile_w_r = 0; enable = 1; wait(10, SC_NS); print();
@@ -61,12 +65,13 @@ mem_addr = 6; mem_w_r = 0; inst_data = 0; wait(10, SC_NS); print();*/
 
 //AMBA bus enc test
 
-reset = 0; inst_data = 0; enc_dec = 1; burst_op = 3; bus_wb = 1; mem_addr = 5; bus_trigger = 1; 
+/*
+inst_data = 0; enc_dec = 1; burst_op = 3; bus_wb = 1; mem_addr = 5; bus_trigger = 1;// wait(20, SC_NS); print();bus_trigger = 0;
 wait(500, SC_NS); print();
 mem_addr = 5; bus_wb = 0; mem_w_r = 0; wait(100, SC_NS); print();
 mem_addr = 6; bus_wb = 0; mem_w_r = 0; wait(100, SC_NS); print();
 mem_addr = 7; bus_wb = 0; mem_w_r = 0; wait(100, SC_NS); print();
-mem_addr = 8; bus_wb = 0; mem_w_r = 0; wait(100, SC_NS); print();
+mem_addr = 8; bus_wb = 0; mem_w_r = 0; wait(100, SC_NS); print();*/
 
 sc_stop();
 sc_close_vcd_trace_file(wf);
@@ -85,6 +90,6 @@ cout << "(pc, mem_out, fetch_A, fetch_B, Dec_A, Dec_B, Dec_Imm, ALU_out, block_a
 }
 SC_CTOR(MIPS_testbench){
 	SC_THREAD(process)
-	sensitive << clk.pos() << reset;
+	sensitive << clk.pos();
 }
 };
